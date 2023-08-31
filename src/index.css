@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Custom Classes */
+.text-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #26547C;
+  }
+  
+  .text-body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .text-accent {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FDCB58;
+  }
+  
+  .bg-blue {
+    background-color: #26547C;
+  }
+  
+  .bg-yellow {
+    background-color: #FDCB58;
+  }
+  
+
+  .btn-blue {
+    background-color: #26547C;
+    color: white;
+  }
+  
+  .btn-yellow {
+    background-color: #FDCB58;
+    color: white;
+  }
