@@ -1,17 +1,13 @@
 import { Helmet } from "react-helmet-async";
-import Slider from "./Slider/Slider";
 
-
-const Home = () => {
+const Login = () => {
     return (
         <div>
-            <Helmet>
+             <Helmet>
                 <title>School of Music | Home</title>
             </Helmet>
-            <Slider></Slider>
-
         </div>
     );
 };
 
-export default Home;
+export default Login;
