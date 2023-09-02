@@ -5,7 +5,7 @@ const Login = () => {
         <div>
              <Helmet>
                 <title>School of Music | Home</title>
-            </Helmet>
+            </Helmet> 
         </div>
     );
 };

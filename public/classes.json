@@ -1,0 +1,82 @@
+[
+  {
+    "_id": 1,
+    "name": "Piano",
+    "instructorName": "John Smith",
+    "availableSeats": 25,
+    "price": 50,
+    "instructorEmail": "john.smith@email.com",
+    "imageInstrument": "https://images.pexels.com/photos/1021142/pexels-photo-1021142.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "imageInstructor": "https://images.pexels.com/photos/5212317/pexels-photo-5212317.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "_id": 2,
+    "name": "Guitar",
+    "instructorName": "Sarah Davis",
+    "availableSeats": 30,
+    "price": 40,
+    "instructorEmail": "sarah.davis@email.com",
+    "imageInstrument": "https://i.ibb.co/cgLMc0F/guitar-2925274-1280.jpg",
+    "imageInstructor": "https://images.pexels.com/photos/5212339/pexels-photo-5212339.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "_id": 3,
+    "name": "Violin",
+    "instructorName": "Michael Johnson",
+    "availableSeats": 40,
+    "price": 45,
+    "instructorEmail": "michael.johnson@email.com",
+    "imageInstrument": "https://images.pexels.com/photos/34221/violin-musical-instrument-music-sound.jpg?auto=compress&cs=tinysrgb&w=600",
+    "imageInstructor": "https://images.pexels.com/photos/6326377/pexels-photo-6326377.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "_id": 4,
+    "name": "Drums",
+    "instructorName": "Emily Wilson",
+    "availableSeats": 50,
+    "price": 55,
+    "instructorEmail": "emily.wilson@email.com",
+    "imageInstrument": "https://images.pexels.com/photos/237464/pexels-photo-237464.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "imageInstructor": "https://images.pexels.com/photos/6326377/pexels-photo-6326377.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "_id": 5,
+    "name": "Flute",
+    "instructorName": "Lisa Anderson",
+    "availableSeats": 60,
+    "price": 35,
+    "instructorEmail": "lisa.anderson@email.com",
+    "imageInstrument": "https://images.pexels.com/photos/2254140/pexels-photo-2254140.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "imageInstructor": "https://images.pexels.com/photos/8191574/pexels-photo-8191574.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "_id": 6,
+    "name": "Saxophone",
+    "instructorName": "David Wilson",
+    "availableSeats": 45,
+    "price": 60,
+    "instructorEmail": "david.wilson@email.com",
+    "imageInstrument": "https://i.ibb.co/0r5M9Ds/saxophone-546303-1280.jpg",
+    "imageInstructor": "https://images.pexels.com/photos/4491461/pexels-photo-4491461.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "_id": 7,
+    "name": "Cello",
+    "instructorName": "Anna Lee",
+    "availableSeats": 35,
+    "price": 55,
+    "instructorEmail": "anna.lee@email.com",
+    "imageInstrument": "https://i.ibb.co/ky1p549/cello-2830670-1280.jpg",
+    "imageInstructor": "https://images.pexels.com/photos/3772620/pexels-photo-3772620.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "_id": 8,
+    "name": "Trumpet",
+    "instructorName": "Mark Turner",
+    "availableSeats": 55,
+    "price": 50,
+    "instructorEmail": "mark.turner@email.com",
+    "imageInstrument": "https://images.pexels.com/photos/9401772/pexels-photo-9401772.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "imageInstructor": "https://images.pexels.com/photos/3184658/pexels-photo-3184658.jpeg?auto=compress&cs=tinysrgb&w=600"
+  }
+]

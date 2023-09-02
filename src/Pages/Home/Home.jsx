@@ -1,5 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Slider from "./Slider/Slider";
+import PopularClasses from "./PopularClasses/PopularClasses";
+import PopularInstructors from "./PopularInstructors/PopularInstructors";
 
 
 const Home = () => {
@@ -9,7 +11,8 @@ const Home = () => {
                 <title>School of Music | Home</title>
             </Helmet>
             <Slider></Slider>
-
+            <PopularClasses></PopularClasses>
+            <PopularInstructors></PopularInstructors>
         </div>
     );
 };
