@@ -17,7 +17,7 @@ const PopularClasses = () => {
                 {classes.map(classItem => (
                     <div key={classItem._id}>
                         <div className="card card-side bg-base-100 shadow-xl mx-2 p-2">
-                            <figure><img className="w-28 h-28 rounded" src={classItem.imageInstrument} alt="Movie" /></figure>
+                            <figure><img className="w-32 h-28 rounded hover:scale-125 duration-200" src={classItem.imageInstrument} alt="Movie" /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{classItem.name}</h2>
                                 <p>price: ${classItem.price}</p>
