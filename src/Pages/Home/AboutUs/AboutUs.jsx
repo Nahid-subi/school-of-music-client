@@ -5,7 +5,7 @@ const AboutUs = () => {
     return (
         <div>
             <SectionTitle heading="About Us"></SectionTitle>
-            <div className="flex flex-wrap justify-center gap-20 text-center items-center">
+            <div className="flex flex-wrap justify-center gap-20 text-center items-center mx-2">
                 <div className="w-36 h-28 rounded bg-red-400 text-white font-bold p-5">
                     <h1><CountUp delay={2} end={500} />k+</h1>
                     <h2>active users</h2>
