@@ -10,6 +10,8 @@ const Login = () => {
         setShowPassword(!showPassword);
     }
 
+    
+
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
@@ -28,7 +30,7 @@ const Login = () => {
                     <div className="hero-content flex-col lg:flex-row-reverse">
                         <div className="text-center lg:w-[40%] lg:text-left">
                             <h1 className="text-5xl font-bold text-blue">Login now!</h1>
-                            <p className="py-6">Guitar has different strings on it which help to produce sound, the strings of the guitar can be vibrated and with help of this vibration, the sound is produced.</p>
+                            <p className="py-6 hidden md:block lg:block">Guitar has different strings on it which help to produce sound, the strings of the guitar can be vibrated and with help of this vibration, the sound is produced.</p>
                         </div>
                         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                             <form onSubmit={handleLogin} className="card-body">
