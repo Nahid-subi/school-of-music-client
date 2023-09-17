@@ -5,7 +5,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Login from "../components/Login/Login";
 import Instructors from "../Pages/Instructors/Instructors";
 import Classes from "../Pages/Classes/Classes";
-import Register from "../components/Register/Register";
+import SignUp from "../components/SignUP/SignUp";
 
 
 export const router = createBrowserRouter([
@@ -23,8 +23,8 @@ export const router = createBrowserRouter([
                 element: <Login></Login>
             },
             {
-                path: 'register',
-                element: <Register></Register>
+                path: 'signup',
+                element: <SignUp></SignUp>
             },
             {
                 path: 'instructors',

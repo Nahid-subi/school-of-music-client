@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -10,7 +11,7 @@ const Login = () => {
         setShowPassword(!showPassword);
     }
 
-    
+    const {signIn} = useContext(AuthContext)
 
     const handleLogin = event => {
         event.preventDefault();
@@ -18,12 +19,17 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+        signIn(email,password)
+        .then(result => {
+            const user = result.user;
+            console.log(user)
+        })
     }
 
     return (
         <div>
             <Helmet>
-                <title>School of Music | Home</title>
+                <title>School of Music | Login</title>
             </Helmet>
             <div>
                 <div className="hero min-h-screen bg-base-200">
@@ -61,7 +67,8 @@ const Login = () => {
                                     <input type="submit" className="btn btn-yellow" value="Login" />
                                 </div>
                                 <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Do not have an account? <Link className="text-blue" to="/register">Sign up</Link></a>
+                                    <h2>Do not have an account? 
+                                    <Link className="text-blue" to="/signup"> Sign up</Link></h2>
                                 </label>
                             </form>
                         </div>
