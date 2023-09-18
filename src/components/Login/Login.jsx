@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -11,19 +12,25 @@ const Login = () => {
         setShowPassword(!showPassword);
     }
 
-    const {signIn} = useContext(AuthContext)
+    const { signIn } = useContext(AuthContext)
 
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
-        signIn(email,password)
-        .then(result => {
-            const user = result.user;
-            console.log(user)
-        })
+        signIn(email, password)
+            .then(() => {
+                Swal.fire({
+                    title: 'User Login Successful',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
+            })
     }
 
     return (
@@ -67,8 +74,8 @@ const Login = () => {
                                     <input type="submit" className="btn btn-yellow" value="Login" />
                                 </div>
                                 <label className="label">
-                                    <h2>Do not have an account? 
-                                    <Link className="text-blue" to="/signup"> Sign up</Link></h2>
+                                    <h2>Do not have an account?
+                                        <Link className="text-blue" to="/signup"> Sign up</Link></h2>
                                 </label>
                             </form>
                         </div>
