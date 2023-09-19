@@ -23,6 +23,7 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
+
         signIn(email, password)
             .then(() => {
                 Swal.fire({
@@ -34,9 +35,24 @@ const Login = () => {
                         popup: 'animate__animated animate__fadeOutUp'
                     }
                 });
-                navigate(from, { replace: true })
+                navigate(from, { replace: true });
             })
+            .catch(error => {
+                // Handle Firebase authentication errors here
+                Swal.fire({
+                    title: 'Error',
+                    text: error.message, // Display the error message
+                    icon: 'error',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                });
+            });
     }
+
 
     return (
         <div>

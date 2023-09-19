@@ -8,34 +8,62 @@ import Swal from "sweetalert2";
 
 
 const SignUp = () => {
-    const { register, handleSubmit, reset,  formState: { errors } } = useForm();
-    const {createUser,updateUserProfile} = useContext(AuthContext)
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { createUser, updateUserProfile } = useContext(AuthContext)
     const navigate = useNavigate()
     const { logOut } = useContext(AuthContext)
 
     const onSubmit = data => {
-        console.log(data)
+        console.log(data);
         createUser(data.email, data.password)
-        .then(result => {
-            const loggedUser = result.user;
-            console.log(loggedUser)
-            updateUserProfile(data.name,data.photo)
-            .then(()=>{
-                console.log("User profile info updated")
-                reset();
-                Swal.fire({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'User created successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                  logOut()
-                  navigate('/login')
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                updateUserProfile(data.name, data.photo)
+                    .then(() => {
+                        console.log("User profile info updated");
+                        reset();
+                        Swal.fire({
+                            position: 'top-center',
+                            icon: 'success',
+                            title: 'User created successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        logOut();
+                        navigate('/login');
+                    })
+                    .catch(error => {
+                        // Handle Firebase user profile update error
+                        Swal.fire({
+                            title: 'Error',
+                            text: error.message,
+                            icon: 'error',
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            }
+                        });
+                    });
             })
-            .catch(error => console.log(error))
-        })
-    }
+            .catch(error => {
+                // Handle Firebase user creation error
+                Swal.fire({
+                    title: 'Error',
+                    text: error.message,
+                    icon: 'error',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                });
+            });
+    };
+
     // console.log(watch("example"));
 
     const [showPassword, setShowPassword] = useState(false);
