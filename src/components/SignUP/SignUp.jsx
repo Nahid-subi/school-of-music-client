@@ -6,22 +6,38 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 
-
 const SignUp = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile } = useContext(AuthContext)
-    const navigate = useNavigate()
-    const { logOut } = useContext(AuthContext)
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { logOut } = useContext(AuthContext);
+
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
+    };
 
     const onSubmit = data => {
-        console.log(data);
+        if (data.password !== confirmPassword) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Passwords do not match',
+                icon: 'error',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+            return;
+        }
+
         createUser(data.email, data.password)
-            .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
+            .then(() => {
                 updateUserProfile(data.name, data.photo)
                     .then(() => {
-                        console.log("User profile info updated");
                         reset();
                         Swal.fire({
                             position: 'top-center',
@@ -64,14 +80,11 @@ const SignUp = () => {
             });
     };
 
-    // console.log(watch("example"));
-
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     }
-
 
     return (
         <div>
@@ -111,7 +124,7 @@ const SignUp = () => {
                                         className="input input-bordered"
                                         {...register("photo", { required: "photo is required" })}
                                     />
-                                    {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+                                    {errors.photo && <p className="text-red-500">{errors.photo.message}</p>}
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -131,7 +144,7 @@ const SignUp = () => {
                                         <span className="label-text">Password</span>
                                     </label>
                                     <div>
-                                        <div className=" flex items-center gap-4">
+                                        <div className="flex items-center gap-4">
                                             <input
                                                 type={showPassword ? "text" : "password"}
                                                 name="password"
@@ -163,6 +176,27 @@ const SignUp = () => {
                                         )}
                                     </div>
                                 </div>
+
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Confirm Password</span>
+                                    </label>
+                                    <div className="flex items-center gap-4">
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            name="confirmPassword"
+                                            placeholder="confirm password"
+                                            className="input input-bordered"
+                                            value={confirmPassword}
+                                            onChange={handleConfirmPasswordChange}
+                                        />
+                                        {showPassword ?
+                                            <FiEyeOff className="password-toggle" onClick={togglePasswordVisibility} /> :
+                                            <FiEye className="password-toggle" onClick={togglePasswordVisibility} />
+                                        }
+                                    </div>
+                                    {errors.confirmPassword && <p className="text-red-500">This field is required</p>}
+                                </div>
                                 <div className="form-control mt-6">
                                     <input type="submit" className="btn btn-yellow" value="Sign Up" />
                                 </div>
@@ -172,7 +206,6 @@ const SignUp = () => {
                                     </h2>
                                 </label>
                             </form>
-
                         </div>
                     </div>
                 </div>
