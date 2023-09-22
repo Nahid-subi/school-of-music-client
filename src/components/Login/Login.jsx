@@ -1,11 +1,14 @@
-import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthProvider";
+import { useContext } from "react";
+import { useState } from "react";
 
 const Login = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -18,11 +21,8 @@ const Login = () => {
 
     const from = location.state?.from?.pathname || "/";
 
-    const handleLogin = event => {
-        event.preventDefault();
-        const form = event.target;
-        const email = form.email.value;
-        const password = form.password.value;
+    const onSubmit = data => {
+        const { email, password } = data;
 
         signIn(email, password)
             .then(() => {
@@ -53,7 +53,6 @@ const Login = () => {
             });
     }
 
-
     return (
         <div>
             <Helmet>
@@ -67,12 +66,19 @@ const Login = () => {
                             <p className="py-6 hidden md:block lg:block">Guitar has different strings on it which help to produce sound, the strings of the guitar can be vibrated and with help of this vibration, the sound is produced.</p>
                         </div>
                         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                            <form onSubmit={handleLogin} className="card-body">
+                            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Email</span>
                                     </label>
-                                    <input type="email" name="email" placeholder="email" className="input input-bordered" />
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="email"
+                                        className="input input-bordered"
+                                        {...register("email", { required: "Email is required" })}
+                                    />
+                                    {errors.email && <p className="text-red-500">{errors.email.message}</p>}
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -84,12 +90,14 @@ const Login = () => {
                                             name="password"
                                             placeholder="password"
                                             className="input input-bordered"
+                                            {...register("password", { required: "Password is required" })}
                                         />
                                         {showPassword ?
                                             <FiEyeOff className="password-toggle" onClick={togglePasswordVisibility} /> :
                                             <FiEye className="password-toggle" onClick={togglePasswordVisibility} />
                                         }
                                     </div>
+                                    {errors.password && <p className="text-red-500">{errors.password.message}</p>}
                                 </div>
                                 <div className="form-control mt-6">
                                     <input type="submit" className="btn btn-yellow" value="Login" />
