@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css'
 import { FaQuoteLeft } from 'react-icons/fa';
-
+import { Fade ,Slide} from "react-awesome-reveal";
 
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
@@ -33,8 +33,8 @@ const Testimonials = () => {
                                 value={review.rating}
                                 readOnly
                             />
-                            <p className="py-8">{review.details}</p>
-                            <h3 className="text-2xl text-orange-400">{review.name}</h3>
+                            <Fade heartBeat><p className="py-8">{review.details}</p></Fade>
+                            <Slide><h3 className="text-2xl text-orange-400">{review.name}</h3></Slide>
                         </div>
                     </SwiperSlide>)
                 }
