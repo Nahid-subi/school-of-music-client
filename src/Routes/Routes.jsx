@@ -9,6 +9,7 @@ import SignUp from "../components/SignUP/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import MyCart from "../Pages/Dashboard/MyCart/MyCart";
 import Dashboard from "../Layouts/Dashboard";
+import MyEnrolled from "../Pages/Dashboard/MyEnrolled/MyEnrolled";
 
 
 export const router = createBrowserRouter([
@@ -37,20 +38,20 @@ export const router = createBrowserRouter([
                 path: 'classes',
                 element: <Classes></Classes>
             },
-            {
-                path: 'dashboard',
-                element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
-            },
         ]
     },
     {
         path: 'dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             {
-                path:"mycart",
-                element:<MyCart></MyCart>
-            }
+                path: "mycart",
+                element: <MyCart></MyCart>
+            },
+            {
+                path: "myenrolled",
+                element: <MyEnrolled></MyEnrolled>
+            },
         ]
     }
 ]);
