@@ -10,7 +10,32 @@ const ManageUsers = () => {
         return res.json();
     })
     const handleDelete = (user) => {
-
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/users/${user._id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            refetch()
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+            }
+        })
     }
     const handleMakeAdmin = (user) => {
         fetch(`http://localhost:5000/users/admin/${user._id}`, {
@@ -24,6 +49,24 @@ const ManageUsers = () => {
                         position: 'top-end',
                         icon: 'success',
                         title: `${user.name} is an Admin Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+    }
+    const handleMakeInstructor = (user) => {
+        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    refetch();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `${user.name} is an I    nstructor Now!`,
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -62,7 +105,7 @@ const ManageUsers = () => {
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
                                         <td>{user.role === 'instructor' ? "instructor" :
-                                            <button className="btn btn-info btn-sm"><FaUserTie></FaUserTie></button>}
+                                            <button onClick={() => handleMakeInstructor(user)} className="btn btn-info btn-sm"><FaUserTie></FaUserTie></button>}
                                         </td>
                                         <td>{user.role === 'admin' ? "admin" :
                                             <button onClick={() => handleMakeAdmin(user)} className="btn btn-yellow btn-sm"><FaUserShield></FaUserShield></button>}
