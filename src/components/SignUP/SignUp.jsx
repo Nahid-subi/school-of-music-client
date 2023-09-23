@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Pages/Shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -38,16 +39,29 @@ const SignUp = () => {
             .then(() => {
                 updateUserProfile(data.name, data.photo)
                     .then(() => {
-                        reset();
-                        Swal.fire({
-                            position: 'top-center',
-                            icon: 'success',
-                            title: 'User created successfully',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        logOut();
-                        navigate('/login');
+                        const saveUser = { name: data.name, email: data.email }
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'success',
+                                        title: 'User created successfully',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    logOut();
+                                    navigate('/login');
+                                }
+                            })
                     })
                     .catch(error => {
                         // Handle Firebase user profile update error
@@ -206,6 +220,7 @@ const SignUp = () => {
                                     </h2>
                                 </label>
                             </form>
+                            <SocialLogin></SocialLogin>
                         </div>
                     </div>
                 </div>

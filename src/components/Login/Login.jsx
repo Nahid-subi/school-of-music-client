@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext } from "react";
 import { useState } from "react";
+import SocialLogin from "../../Pages/Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -107,6 +108,7 @@ const Login = () => {
                                         <Link className="text-blue" to="/signup"> Sign up</Link></h2>
                                 </label>
                             </form>
+                            <SocialLogin></SocialLogin>
                         </div>
                     </div>
                 </div>
