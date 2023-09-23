@@ -3,10 +3,9 @@ import { Helmet } from "react-helmet-async";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { AuthContext } from "../../providers/AuthProvider";
-import { useContext } from "react";
 import { useState } from "react";
 import SocialLogin from "../../Pages/Shared/SocialLogin/SocialLogin";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -16,7 +15,7 @@ const Login = () => {
         setShowPassword(!showPassword);
     }
 
-    const { signIn } = useContext(AuthContext)
+    const { signIn } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 

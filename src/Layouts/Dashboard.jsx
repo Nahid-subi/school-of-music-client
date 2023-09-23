@@ -1,9 +1,11 @@
 import { Link, Outlet } from "react-router-dom";
 import { FaShoppingCart, FaBookReader, FaHome, FaNewspaper, FaUserTie, FaCalendar, FaUsersCog, FaClipboardList } from 'react-icons/fa';
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
     // todo : load data from the server to have  dynamic 
-    const isAdmin = true;
+    // const isAdmin = true;
+    const [isAdmin] = useAdmin()
     return (
         <div>
             <div className="drawer lg:drawer-open">

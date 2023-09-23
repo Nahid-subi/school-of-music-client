@@ -1,17 +1,16 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../../Pages/Shared/SocialLogin/SocialLogin";
+import useAuth from "../../Hooks/useAuth";
 
 const SignUp = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const { createUser, updateUserProfile, logOut } = useAuth();
     const navigate = useNavigate();
-    const { logOut } = useContext(AuthContext);
 
     const [confirmPassword, setConfirmPassword] = useState('');
 
