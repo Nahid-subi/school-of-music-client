@@ -11,6 +11,10 @@ import MyCart from "../Pages/Dashboard/MyCart/MyCart";
 import Dashboard from "../Layouts/Dashboard";
 import MyEnrolled from "../Pages/Dashboard/MyEnrolled/MyEnrolled";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
+import ManageClasses from "../Pages/Dashboard/ManageClasses/ManageClasses";
+import AddAClass from "../Pages/Dashboard/AddAClass/AddAClass";
+import MyClasses from "../Pages/Dashboard/MyClasses/MyClasses";
+import Welcome from "../Pages/Dashboard/AddAClass/Welcome/Welcome";
 
 
 export const router = createBrowserRouter([
@@ -46,6 +50,10 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             {
+                path: "welcome",
+                element: <Welcome></Welcome>
+            },
+            {
                 path: "mycart",
                 element: <MyCart></MyCart>
             },
@@ -56,6 +64,18 @@ export const router = createBrowserRouter([
             {
                 path: 'manageusers',
                 element: <ManageUsers></ManageUsers>
+            },
+            {
+                path: 'manageclasses',
+                element: <ManageClasses></ManageClasses>
+            },
+            {
+                path: 'addclass',
+                element: <AddAClass></AddAClass>
+            },
+            {
+                path: 'myclasses',
+                element: <MyClasses></MyClasses>
             },
         ]
     }

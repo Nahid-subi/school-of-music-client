@@ -2,7 +2,7 @@
 const ManageClasses = () => {
     return (
         <div>
-            
+            dsfdsfsa
         </div>
     );
 };

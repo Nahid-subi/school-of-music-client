@@ -1,6 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
+import useAdmin from "../../Hooks/useAdmin";
+import useInstructor from "../../Hooks/useInstructor";
 
 const ClassCard = ({ classItem }) => {
     const isSoldOut = classItem.availableSeats === 0;
@@ -8,7 +10,7 @@ const ClassCard = ({ classItem }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
-
+    
     const addToCart = () => {
         if (user && user.email) {
             const cartItem = {cartId:classItem._id,name:classItem.name,price:classItem.price,email:user.email,image:classItem.imageInstrument
@@ -45,6 +47,9 @@ const ClassCard = ({ classItem }) => {
         }
     };
 
+    const [isAdmin] = useAdmin();
+    const [isInstructor] = useInstructor();
+    const isUserAuthorized = isAdmin || isInstructor;
     return (
         <div>
             <div className={`card flex justify-center mx-2 max-w-80 ${isSoldOut ? 'bg-red-500' : 'bg-base-100'} shadow-xl`}>
@@ -61,7 +66,7 @@ const ClassCard = ({ classItem }) => {
                         <button
                             className={`btn btn-yellow  ${isSoldOut ? 'disabled:cursor-not-allowed' : ''}`}
                             onClick={addToCart}
-                            disabled={isSoldOut}
+                            disabled={isSoldOut || isUserAuthorized}
                         >
                             Add to Cart
                         </button>

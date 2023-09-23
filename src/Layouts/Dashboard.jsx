@@ -1,11 +1,13 @@
 import { Link, Outlet } from "react-router-dom";
-import { FaShoppingCart, FaBookReader, FaHome, FaNewspaper, FaUserTie, FaCalendar, FaUsersCog, FaClipboardList } from 'react-icons/fa';
+import { FaShoppingCart, FaBookReader, FaHome, FaNewspaper, FaUserTie, FaCalendar, FaUsersCog, FaClipboardList, FaAddressBook, FaPlusCircle } from 'react-icons/fa';
 import useAdmin from "../Hooks/useAdmin";
+import useInstructor from "../Hooks/useInstructor";
 
 const Dashboard = () => {
     // todo : load data from the server to have  dynamic 
     // const isAdmin = true;
     const [isAdmin] = useAdmin()
+    const [isInstructor] = useInstructor()
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -32,12 +34,22 @@ const Dashboard = () => {
                                 </> :
 
                                 <>
-                                    <li className="bg-yellow rounded text-white"><Link to="mycart"><FaShoppingCart></FaShoppingCart> My Selected Classes</Link></li>
-                                    <li className="bg-yellow rounded text-white"><Link to="myenrolled"><FaBookReader></FaBookReader>My Enrolled Classes</Link></li>
-                                    <li className="bg-yellow rounded text-white"><Link to="myenrolled"><FaCalendar></FaCalendar>Payment History</Link></li>
-
+                                    {
+                                        isInstructor ?
+                                            <>
+                                                <li className="bg-yellow rounded text-white"><Link to="addclass"><FaPlusCircle></FaPlusCircle> Add a Class</Link></li>
+                                                <li className="bg-yellow rounded text-white"><Link to="myclasses"><FaAddressBook></FaAddressBook>My Classes</Link></li>
+                                            </>
+                                            :
+                                            <>
+                                                <li className="bg-yellow rounded text-white"><Link to="mycart"><FaShoppingCart></FaShoppingCart> My Selected Classes</Link></li>
+                                                <li className="bg-yellow rounded text-white"><Link to="myenrolled"><FaBookReader></FaBookReader>My Enrolled Classes</Link></li>
+                                                <li className="bg-yellow rounded text-white"><Link to="myenrolled"><FaCalendar></FaCalendar>Payment History</Link></li>
+                                            </>
+                                    }
                                 </>
                         }
+
 
                         <div className="divider bg-white h-1"></div>
 
