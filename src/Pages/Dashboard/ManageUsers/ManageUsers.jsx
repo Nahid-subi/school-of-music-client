@@ -107,13 +107,24 @@ const ManageUsers = () => {
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
                                         <td>{user.role === 'instructor' ? "instructor" :
-                                            <button onClick={() => handleMakeInstructor(user)} className="btn btn-info btn-sm"><FaUserTie></FaUserTie></button>}
+                                            <button onClick={() =>
+                                                handleMakeInstructor(user)}
+                                                className="btn btn-info btn-sm"
+                                                disabled={user.role === "admin" || user.role === "instructor"}
+                                            >
+                                                <FaUserTie></FaUserTie></button>}
                                         </td>
                                         <td>{user.role === 'admin' ? "admin" :
-                                            <button onClick={() => handleMakeAdmin(user)} className="btn btn-yellow btn-sm"><FaUserShield></FaUserShield></button>}
+                                            <button onClick={() =>
+                                                handleMakeAdmin(user)}
+                                                className="btn btn-yellow btn-sm"
+                                                disabled={user.role === "admin" || user.role === "instructor"}
+                                            >
+                                                <FaUserShield></FaUserShield></button>}
                                         </td>
                                         <td>
-                                            <button onClick={() => handleDelete(user)} className="btn btn-error btn-sm"><FaTrashAlt></FaTrashAlt></button>
+                                            <button onClick={() => handleDelete(user)}
+                                                className="btn btn-error btn-sm"><FaTrashAlt></FaTrashAlt></button>
                                         </td>
                                     </tr>)
                             }

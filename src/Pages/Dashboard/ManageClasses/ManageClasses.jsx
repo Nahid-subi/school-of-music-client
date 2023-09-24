@@ -5,7 +5,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 
 const ManageClasses = () => {
-    const [classes, ,refetch] = useClasses();
+    const [classes, , refetch] = useClasses();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedClass, setSelectedClass] = useState(null);
     if (!classes) {
@@ -20,7 +20,7 @@ const ManageClasses = () => {
         setIsModalOpen(false);
     };
     const handleMakeApproved = (item) => {
-        fetch(`http://localhost:5000/classes/${item._id}`, {
+        fetch(`http://localhost:5000/classes/approved/${item._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -31,6 +31,24 @@ const ManageClasses = () => {
                         position: 'top-end',
                         icon: 'success',
                         title: `${item.name} is Approved Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+    }
+    const handleMakeDenied = (item) => {
+        fetch(`http://localhost:5000/classes/denied/${item._id}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    refetch();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `${item.name} is Denied Now!`,
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -97,8 +115,9 @@ const ManageClasses = () => {
                                         <button
                                             className="btn btn-error btn-xs"
                                             disabled={item.status === "approved" || item.status === "denied"}
+                                            onClick={() => handleMakeDenied(item)}
                                         >
-                                            Deny
+                                            {item.status === "denied" ? "Denied" : "Deny"}
                                         </button>
                                     </td>
                                     <td>
@@ -133,17 +152,17 @@ const ManageClasses = () => {
                         <p className="py-4">
                             Instructor: {selectedClass.instructorName}
                             <br />
-                            Instructor: {selectedClass.instructorEmail}
+                            email: {selectedClass.instructorEmail}
                         </p>
                         <div>
-                            <form>
-                                <textarea name="text" className="w-full"></textarea>
+                            {/* <form>
+                                <textarea name="text" className="w-full border-2"></textarea>
                                 <input className="btn btn-info btn-xs" type="submit" value="Send Feedback" />
-                            </form>
-                            {/* <div>
+                            </form> */}
+                            <div>
                                 <textarea name="text" className="w-full"></textarea>
                                 <button className="btn btn-info btn-xs">Send Feedback</button>
-                            </div> */}
+                            </div>
 
                         </div>
                     </div>
