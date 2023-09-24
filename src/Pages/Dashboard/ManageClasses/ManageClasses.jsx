@@ -2,14 +2,15 @@ import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useClasses from "../../../Hooks/useClasses";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const ManageClasses = () => {
-    const [classes] = useClasses();
+    const [classes, ,refetch] = useClasses();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedClass, setSelectedClass] = useState(null);
     if (!classes) {
         return <div>Loading...</div>; // Or some loading indicator
-      }
+    }
     const openModal = (classData) => {
         setSelectedClass(classData);
         setIsModalOpen(true);
@@ -18,6 +19,24 @@ const ManageClasses = () => {
     const closeModal = () => {
         setIsModalOpen(false);
     };
+    const handleMakeApproved = (item) => {
+        fetch(`http://localhost:5000/classes/${item._id}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    refetch();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `${item.name} is Approved Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+    }
     return (
         <div>
             <Helmet>
@@ -70,13 +89,14 @@ const ManageClasses = () => {
                                     <td>
                                         <button
                                             className="btn btn-yellow mx-2 btn-xs"
-                                            disabled={item.status === "Approved" || item.status === "Denied"}
+                                            disabled={item.status === "approved" || item.status === "denied"}
+                                            onClick={() => handleMakeApproved(item)}
                                         >
-                                            Approve
+                                            {item.status === "approved" ? "Approved" : "Approve"}
                                         </button>
                                         <button
                                             className="btn btn-error btn-xs"
-                                            disabled={item.status === "Approved" || item.status === "Denied"}
+                                            disabled={item.status === "approved" || item.status === "denied"}
                                         >
                                             Deny
                                         </button>
