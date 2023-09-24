@@ -3,8 +3,16 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useClasses from "../../../Hooks/useClasses";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
 
 const ManageClasses = () => {
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset
+    } = useForm();
     const [classes, , refetch] = useClasses();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedClass, setSelectedClass] = useState(null);
@@ -55,6 +63,34 @@ const ManageClasses = () => {
                 }
             })
     }
+
+    const onSubmit = async (data) => {
+        const { feedback } = data;
+        const newItem = { feedback };
+
+        const response = await fetch(`http://localhost:5000/classes/feedback/${selectedClass._id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newItem),
+        });
+
+        const result = await response.json();
+        if (result.modifiedCount) {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Class added successfully',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            reset()
+
+            closeModal();
+        }
+    };
+
     return (
         <div>
             <Helmet>
@@ -155,14 +191,17 @@ const ManageClasses = () => {
                             email: {selectedClass.instructorEmail}
                         </p>
                         <div>
-                            {/* <form>
-                                <textarea name="text" className="w-full border-2"></textarea>
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <textarea name="text" className="w-full border-2"
+                                    {...register("feedback", { required: true })}
+                                ></textarea>
+                                {errors.feedback && <span className="text-red-500">This field is required</span>}
                                 <input className="btn btn-info btn-xs" type="submit" value="Send Feedback" />
-                            </form> */}
-                            <div>
-                                <textarea name="text" className="w-full"></textarea>
+                            </form>
+                            {/* <div>
+                                <textarea name="text" className="w-full border-2"></textarea>
                                 <button className="btn btn-info btn-xs">Send Feedback</button>
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>
