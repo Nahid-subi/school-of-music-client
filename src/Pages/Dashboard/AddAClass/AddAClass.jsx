@@ -16,12 +16,21 @@ const AddAClass = () => {
     } = useForm();
 
     const onSubmit = data => {
-
         const { name, instructorName, availableSeats, price, instructorEmail, imageInstrument, imageInstructor } = data;
-        const newItem = { name, instructorName, availableSeats: parseFloat(availableSeats), price: parseFloat(price), instructorEmail, imageInstrument, imageInstructor }
+        const newItem = {
+            name,
+            instructorName,
+            availableSeats: parseFloat(availableSeats),
+            price: parseFloat(price),
+            instructorEmail,
+            imageInstrument,
+            imageInstructor,
+            status: "pending" 
+        };
+
         axiosSecure.post('/classes', newItem)
             .then(data => {
-                if(data.data.insertedId){
+                if (data.data.insertedId) {
                     reset();
                     Swal.fire({
                         position: 'center',
@@ -29,10 +38,11 @@ const AddAClass = () => {
                         title: 'Class added successfully',
                         showConfirmButton: false,
                         timer: 1500
-                      })
+                    });
                 }
-            })
-    }
+            });
+    };
+
 
     return (
         <div>
