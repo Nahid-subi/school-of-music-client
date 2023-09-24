@@ -6,7 +6,7 @@ const PopularInstructors = () => {
     const [classes, setClasses] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/classes')
+        fetch('http://localhost:5000/instructor')
             .then(res => res.json())
             .then(data => setClasses(data.slice(0, 6))) // Limit to 6 items
     }, []);
