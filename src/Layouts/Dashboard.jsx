@@ -44,7 +44,7 @@ const Dashboard = () => {
                                             <>
                                                 <li className="bg-yellow rounded text-white"><Link to="mycart"><FaShoppingCart></FaShoppingCart> My Selected Classes</Link></li>
                                                 <li className="bg-yellow rounded text-white"><Link to="myenrolled"><FaBookReader></FaBookReader>My Enrolled Classes</Link></li>
-                                                <li className="bg-yellow rounded text-white"><Link to="myenrolled"><FaCalendar></FaCalendar>Payment History</Link></li>
+                                                <li className="bg-yellow rounded text-white"><Link to="paymenthistory"><FaCalendar></FaCalendar>Payment History</Link></li>
                                             </>
                                     }
                                 </>

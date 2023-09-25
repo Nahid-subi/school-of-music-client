@@ -17,6 +17,7 @@ import MyClasses from "../Pages/Dashboard/MyClasses/MyClasses";
 import Welcome from "../Pages/Dashboard/AddAClass/Welcome/Welcome";
 import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistroy/PaymentHistory";
 
 
 export const router = createBrowserRouter([
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
             {
                 path: "mycart",
                 element: <MyCart></MyCart>
+            },
+            {
+                path: "paymenthistory",
+                element: <PaymentHistory></PaymentHistory>
             },
             {
                 path: "myenrolled",
