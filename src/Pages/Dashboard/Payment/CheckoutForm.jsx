@@ -72,6 +72,7 @@ const CheckoutForm = ({ price, cart }) => {
                 cartId: cart.map(item => item._id),
                 itemNames: cart.map(item => item.name),
                 itemPhotos: cart.map(item => item.image),
+                itemPrices: cart.map(item => item.price),
                 classIds: cart.map(item => item.cartId)
             }
             axiosSecure.post('/payments', payment)
