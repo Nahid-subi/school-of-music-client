@@ -15,7 +15,7 @@ const ClassCard = ({ classItem }) => {
         if (user && user.email) {
             const cartItem = {cartId:classItem._id,name:classItem.name,price:classItem.price,email:user.email,image:classItem.imageInstrument
             }
-            fetch(`http://localhost:5000/carts`, {
+            fetch(`https://school-of-music-server.vercel.app/carts`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json" // corrected header name

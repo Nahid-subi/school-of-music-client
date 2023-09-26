@@ -28,7 +28,7 @@ const ManageClasses = () => {
         setIsModalOpen(false);
     };
     const handleMakeApproved = (item) => {
-        fetch(`http://localhost:5000/classes/approved/${item._id}`, {
+        fetch(`https://school-of-music-server.vercel.app/classes/approved/${item._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -46,7 +46,7 @@ const ManageClasses = () => {
             })
     }
     const handleMakeDenied = (item) => {
-        fetch(`http://localhost:5000/classes/denied/${item._id}`, {
+        fetch(`https://school-of-music-server.vercel.app/classes/denied/${item._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -68,7 +68,7 @@ const ManageClasses = () => {
         const { feedback } = data;
         const newItem = { feedback };
 
-        const response = await fetch(`http://localhost:5000/classes/feedback/${selectedClass._id}`, {
+        const response = await fetch(`https://school-of-music-server.vercel.app/classes/feedback/${selectedClass._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

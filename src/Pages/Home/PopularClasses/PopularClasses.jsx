@@ -5,7 +5,7 @@ const PopularClasses = () => {
     const [classes, setClasses] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/classes/approved')
+        fetch('https://school-of-music-server.vercel.app/classes/approved')
             .then(res => res.json())
             .then(data => setClasses(data.slice(0, 6))) // Limit to 6 items
     }, []);
